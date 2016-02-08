@@ -25,7 +25,7 @@ class Generator
     return true unless @config.hasOwnProperty 'stop_on_error'
     @config.stop_on_error
 
-  preventStopOnError: (stream) =>
+  preventStopOnError: (stream) ->
     stream.pipe(plumber())
 
   src: (src) =>
@@ -53,7 +53,7 @@ class Generator
 
   generate: (cb) =>
     @task 'generate', =>
-      @repetitive (config, index) =>
+      @repetitive (config, index) ->
         cb(config, index)
 
 
@@ -65,7 +65,7 @@ class Generator
 
     # for watching we generate numerated tasks of the childs
     @repetitive (config, index) =>
-      @task "generate-#{index}", =>
+      @task "generate-#{index}", ->
         cb(config)
 
   watchAll: (getSelector, runBaseTask = 'generate') =>
