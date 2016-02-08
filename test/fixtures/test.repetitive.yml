@@ -1,0 +1,9 @@
+development: &default
+  enabled: true
+  stop_on_error: true
+  repetitive_test_value: 0
+  repetitive:
+    -
+      repetitive_test_value: 1
+    -
+      repetitive_test_value: 2

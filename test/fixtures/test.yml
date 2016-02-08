@@ -1,0 +1,4 @@
+development: &default
+  enabled: true
+  stop_on_error: false
+  regeneration_task_name: 'false'
