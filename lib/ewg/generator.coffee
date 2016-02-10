@@ -1,4 +1,3 @@
-gulp     = require 'gulp'
 changed  = require 'gulp-changed'
 gulpif   = require 'gulp-if'
 extend   = require 'extend'
@@ -8,18 +7,20 @@ log      = require 'ewg-logging'
 util     = require 'util'
 
 class Generator
-  constructor: (@name, configPath) ->
+  constructor: (@name, configPath, @gulp) ->
+    @gulp   = require('gulp') unless @gulp
     @config = new Config(configPath, @reGenerate).config
 
+    @dest   = @gulp.dest
+    @watch  = @gulp.watch
+
+
   if:                 gulpif
-  dest:               gulp.dest
-  gulp:               gulp
-  watch:              gulp.watch
   changed:            changed
   plumber:            plumber
   log:       (msg) => log.info("#{@name}: ", msg)
   taskName: (name) => "#{@name}:#{name}"
-  task: (name, cb) => gulp.task(@taskName(name), cb)
+  task: (name, cb) => @gulp.task(@taskName(name), cb)
 
   stopOnError: =>
     return true unless @config.hasOwnProperty 'stop_on_error'
@@ -29,8 +30,8 @@ class Generator
     stream.pipe(plumber())
 
   src: (src) =>
-    return gulp.src(src) if @stopOnError()
-    @preventStopOnError gulp.src(src)
+    return @gulp.src(src) if @stopOnError()
+    @preventStopOnError @gulp.src(src)
 
   isRepetitive:   => @config.hasOwnProperty 'repetitive'
 
@@ -49,7 +50,7 @@ class Generator
   reGenerate:           =>
     return if @reGenerationTaskName() == 'false'
     @log('config changed, regenerate')
-    gulp.run @reGenerationTaskName()
+    @gulp.run @reGenerationTaskName()
 
   generate: (cb) =>
     @task 'generate', =>
