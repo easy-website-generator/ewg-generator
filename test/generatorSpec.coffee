@@ -1,11 +1,12 @@
 Generator = require '../index'
 expect  = require('chai').expect
 spy     = require('sinon').spy
+gulp    = require 'gulp'
 
 describe 'ewg/generator', ->
-  generator  = new Generator('test', './test/fixtures/test.yml')
-  minimal    = new Generator('test', './test/fixtures/test.minimal.yml')
-  repetitive = new Generator('test', './test/fixtures/test.repetitive.yml')
+  generator  = new Generator('test', './test/fixtures/test.yml', gulp)
+  minimal    = new Generator('test', './test/fixtures/test.minimal.yml', gulp)
+  repetitive = new Generator('test', './test/fixtures/test.repetitive.yml', gulp)
 
   describe '#stopOnError()', ->
     it 'returns true unless config.stop_on_error is set', ->

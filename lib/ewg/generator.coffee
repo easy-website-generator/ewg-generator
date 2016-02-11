@@ -8,7 +8,6 @@ util     = require 'util'
 
 class Generator
   constructor: (@name, configPath, @gulp) ->
-    @gulp   = require('gulp') unless @gulp
     @config = new Config(configPath, @reGenerate).config
 
     @dest   = @gulp.dest

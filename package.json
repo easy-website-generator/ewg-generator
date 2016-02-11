@@ -26,12 +26,12 @@
     "ewg-config": "^1.0.1",
     "ewg-logging": "^1.0.0",
     "extend": "^3.0.0",
-    "gulp": "^3.9.0",
     "gulp-changed": "^1.3.0",
     "gulp-if": "^2.0.0",
     "gulp-plumber": "^1.0.1"
   },
   "devDependencies": {
+    "gulp": "^3.9.0",
     "chai": "^3.5.0",
     "mocha": "^2.4.5",
     "mocha-sinon": "^1.1.5",
