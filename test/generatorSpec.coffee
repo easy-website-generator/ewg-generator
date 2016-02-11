@@ -8,13 +8,6 @@ describe 'ewg/generator', ->
   minimal    = new Generator('test', './test/fixtures/test.minimal.yml', gulp)
   repetitive = new Generator('test', './test/fixtures/test.repetitive.yml', gulp)
 
-  describe '#stopOnError()', ->
-    it 'returns true unless config.stop_on_error is set', ->
-      expect( minimal.stopOnError() ).to.be.true
-
-    it 'returns false if config.stop_on_error is set to false', ->
-      expect( generator.stopOnError() ).to.be.false
-
   describe '#taskName()', ->
     it 'builds the correct task name', ->
       expect( generator.taskName('mytask') ).to.equal('test:mytask')

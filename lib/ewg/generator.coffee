@@ -1,7 +1,6 @@
 changed  = require 'gulp-changed'
 gulpif   = require 'gulp-if'
 extend   = require 'extend'
-plumber  = require 'gulp-plumber'
 log      = require 'ewg-logging'
 {Config} = require 'ewg-config'
 util     = require 'util'
@@ -16,21 +15,12 @@ class Generator
 
   if:                 gulpif
   changed:            changed
-  plumber:            plumber
   log:       (msg) => log.info("#{@name}: ", msg)
   taskName: (name) => "#{@name}:#{name}"
   task: (name, cb) => @gulp.task(@taskName(name), cb)
 
-  stopOnError: =>
-    return true unless @config.hasOwnProperty 'stop_on_error'
-    @config.stop_on_error
-
-  preventStopOnError: (stream) ->
-    stream.pipe(plumber())
-
   src: (src) =>
-    return @gulp.src(src) if @stopOnError()
-    @preventStopOnError @gulp.src(src)
+    @gulp.src(src)
 
   isRepetitive:   => @config.hasOwnProperty 'repetitive'
 
