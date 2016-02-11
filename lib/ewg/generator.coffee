@@ -8,10 +8,8 @@ util     = require 'util'
 class Generator
   constructor: (@name, configPath, @gulp) ->
     @config = new Config(configPath, @reGenerate).config
-
     @dest   = @gulp.dest
     @watch  = @gulp.watch
-
 
   if:                 gulpif
   changed:            changed
