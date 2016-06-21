@@ -6,19 +6,24 @@ log      = require 'ewg-logging'
 util     = require 'util'
 
 class Generator
-  constructor: (@name, configPath, @gulp) ->
+  constructor: (@name, configPath, @gulp, @basePath = '') ->
     @config = new Config(configPath, @reGenerate).config
-    @dest   = @gulp.dest
     @watch  = @gulp.watch
 
   if:                 gulpif
-  changed:            changed
   log:       (msg) => log.info("#{@name}: ", msg)
   taskName: (name) => "#{@name}:#{name}"
   task: (name, cb) => @gulp.task(@taskName(name), cb)
 
   src: (src) =>
-    @gulp.src(src)
+    @gulp.src("#{@basePath}/#{src}")
+
+  changed: (src) =>
+    changed("#{@basePath}/#{src}")
+
+  dest: (dest) =>
+    @gulp.dest("#{@basePath}/#{dest}")
+
 
   isRepetitive:   => @config.hasOwnProperty 'repetitive'
 
