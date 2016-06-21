@@ -1,6 +1,6 @@
 {
   "name": "ewg-generator",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "ewg generator module",
   "main": "index.js",
   "scripts": {
