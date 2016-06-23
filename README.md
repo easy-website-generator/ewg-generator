@@ -10,6 +10,3 @@ The generator module used by Easy-Website-Generator
 > "[Easy-Website-Generator](https://github.com/easy-website-generator/)"
 
 > "[Creative-Workflow](http://www.creative-workflow.berlin/company.html)"
-
-### Travis build
-...fails random at the moment, but tests are passing
