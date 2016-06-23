@@ -6,7 +6,7 @@ log      = require 'ewg-logging'
 util     = require 'util'
 
 class Generator
-  constructor: (@name, configPath, @gulp, @basePath = '') ->
+  constructor: (@name, configPath, @gulp, @basePath = '.') ->
     @config = new Config(configPath, @reGenerate).config
     @watch  = @gulp.watch
 
