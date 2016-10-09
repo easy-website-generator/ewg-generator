@@ -16,14 +16,20 @@ class Generator
   task: (name, cb) => @gulp.task(@taskName(name), cb)
 
   src: (src) =>
-    @gulp.src("#{@basePath}/#{src}")
+    @gulp.src(@prefixPaths(src))
 
   changed: (src) =>
-    changed("#{@basePath}/#{src}")
+    changed(@prefixPaths(src))
 
   dest: (dest) =>
-    @gulp.dest("#{@basePath}/#{dest}")
+    @gulp.dest(@prefixPaths(dest))
 
+
+  prefixPaths: (paths) =>
+    if(Array.isArray(paths))
+      return paths.map (path) => "#{@basePath}/#{path}"
+
+    "#{@basePath}/#{paths}"
 
   isRepetitive:   => @config.hasOwnProperty 'repetitive'
 
