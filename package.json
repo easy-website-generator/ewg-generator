@@ -1,6 +1,6 @@
 {
   "name": "ewg-generator",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "ewg generator module",
   "main": "index.js",
   "scripts": {
@@ -30,9 +30,9 @@
     "gulp-if": "^2.0.0"
   },
   "devDependencies": {
-    "gulp": "^3.9.1",
     "chai": "^3.5.0",
-    "mocha": "^2.4.5",
+    "gulp": "^3.9.1",
+    "mocha": "^2.5.3",
     "mocha-sinon": "^1.1.5",
     "sinon": "^1.17.3"
   }
