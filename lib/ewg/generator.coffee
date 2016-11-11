@@ -13,7 +13,8 @@ class Generator
   if:                 gulpif
   log:       (msg) => log.info("#{@name}: ", msg)
   taskName: (name) => "#{@name}:#{name}"
-  task: (name, cb) => @gulp.task(@taskName(name), cb)
+  task: (name, cb) =>
+    @gulp.task(@taskName(name), @gulp.series(cb))
 
   src: (src) =>
     @gulp.src(@prefixPaths(src))
@@ -35,13 +36,13 @@ class Generator
 
   repetitive: (cb) =>
     unless @isRepetitive()
-      return unless @config.enabled
+      return cb(-1) unless @config.enabled
       return cb(@config, 0)
 
     for set, index in @config.repetitive
       config = extend(true, {}, @config, set)
-      return unless config.enabled
-      cb(config, index + 1 )
+      return cb(-1) unless config.enabled
+      cb(config, index + 1)
 
 
   reGenerationTaskName: => @config.regeneration_task_name || 'generate'
@@ -52,9 +53,15 @@ class Generator
     @gulp.run @reGenerationTaskName()
 
   generate: (cb) =>
-    @task 'generate', =>
-      @repetitive (config, index) ->
-        cb(config, index)
+    @task 'generate', (done) =>
+      @repetitive (config, index) =>
+        if(config == -1)
+          return done()
+
+
+        return cb(config, index)
+        .on('error', done)
+        .on('end', done)
 
 
   # generate single tasks for repetitive configs
