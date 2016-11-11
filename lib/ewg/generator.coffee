@@ -48,6 +48,7 @@ class Generator
   reGenerate:           =>
     return if @reGenerationTaskName() == 'false'
     @log('config changed, regenerate')
+    #TODO inject generate method, because gulp.run is deprecated in version 4
     @gulp.run @reGenerationTaskName()
 
   generate: (cb) =>
