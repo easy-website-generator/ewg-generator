@@ -1,7 +1,7 @@
 Generator = require '../index'
 gulp      = require 'gulp'
 filenames = require 'gulp-filenames'
-fs        = require 'fs'
+fs        = require 'fs-extra'
 chai      = require 'chai'
 should    = chai.should()
 
@@ -52,20 +52,20 @@ describe 'ewg/generator', ->
         # two repetitive sections, but i gets one more increment
         i.should.equal( 2 )
 
-    describe '#src()', ->
-      it 'recognizes hidden files', ->
-        fs.unlinkSync './test/tmp' if fs.existsSync './test/tmp'
-        
-        Promise.all([
-          new Promise((resolve, reject) ->
-            generator.src(["#{fixturesPath}/**/*"])
-                 .pipe(
-                    filenames('any'))
-                 .pipe(
-                    generator.dest("./test/tmp"))
-                  .on('end', resolve)
-          )
-        ]).then ->
-          files = filenames.get('any')
-          files.should.include('.hidden-file')
-          files.should.include('test.yml')
+  describe '#src()', ->
+    it 'recognizes hidden files', ->
+      fs.removeSync './test/tmp' if fs.existsSync './test/tmp'
+
+      Promise.all([
+        new Promise((resolve, reject) ->
+          generator.src(["#{fixturesPath}/**/*"])
+               .pipe(
+                  filenames('any'))
+               .pipe(
+                  generator.dest("./test/tmp"))
+                .on('end', resolve)
+        )
+      ]).then ->
+        files = filenames.get('any')
+        files.should.include('.hidden-file')
+        files.should.include('test.yml')
