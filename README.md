@@ -10,3 +10,8 @@ The generator module used by Easy-Website-Generator
 > "[Easy-Website-Generator](https://github.com/easy-website-generator/)"
 
 > "[Creative-Workflow](http://www.creative-workflow.berlin/company.html)"
+
+
+### Changes
+##### Version 1.0.10
+  * '#generator.src()' collects hidden files per default
