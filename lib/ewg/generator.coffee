@@ -15,8 +15,8 @@ class Generator
   taskName: (name) => "#{@name}:#{name}"
   task: (name, cb) => @gulp.task(@taskName(name), cb)
 
-  src: (src) =>
-    @gulp.src(@prefixPaths(src))
+  src: (src, config = { dot: true }) =>
+    @gulp.src(@prefixPaths(src), config)
 
   changed: (src) =>
     changed(@prefixPaths(src))
