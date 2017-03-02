@@ -14,4 +14,9 @@ The generator module used by Easy-Website-Generator
 
 ### Changes
 ##### Version 1.0.10
+  * revert gulp-changed dependency
+  * fix folder deletion in test
+
+##### Version 1.0.10
   * '#generator.src()' collects hidden files per default
+  * update dependencies
